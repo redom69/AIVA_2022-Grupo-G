@@ -1,5 +1,6 @@
-import detect_client
+import read_video
 
 
 if __name__ == '__main__':
-    detect_client()
+    prueba = read_video.VideoDetection("../dataset/EnterExitCrossingPaths1front.mpg","../dataset/results/EnterExitCrossingPaths1front.avi")
+    prueba()
