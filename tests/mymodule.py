@@ -1,10 +1,13 @@
-def getBoundingBox(frame):
-    return [[100, 200, 100, 200], [400, 200, 400, 200], [700, 800, 100, 200]]
+from src.detect_client_in_frame import FrameDetection
 
 
 # Metodo que te devuelve una lista si ha reconocido personas en el frame, este te dara el bounding box de estas
-def reconWalker(frame):
-    return getBoundingBox(frame)
+def reconWalker(frame,model):
+    print(frame)
+    initialized_frame = FrameDetection(frame)
+    print(initialized_frame)
+
+    return True
 
 
 # Metodo que te devuelve si una persona o un grupo ha entrado en la tienda o no y de salida te da el numero de personas que lo han hecho

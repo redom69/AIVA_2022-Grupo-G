@@ -1,14 +1,18 @@
 import unittest
-
 import cv2
-
 import mymodule
+from src.read_video import VideoDetection
 
 
 class TestMyModule(unittest.TestCase):
+    global client_detector
+    client_detector = VideoDetection("../dataset/EnterExitCrossingPaths1front.mpg",
+                                     "../dataset/results/EnterExitCrossingPaths1front.avi")
+    client_detector()
+
 
     def test_reconWalker(self):
-        self.assertTrue(mymodule.reconWalker(frame))
+        self.assertTrue(mymodule.reconWalker(VideoDetection.get_test_frame(client_detector)))
 
     def test_enterShop3client(self):
         self.assertEqual(mymodule.enterShop(frame), 3)
@@ -50,6 +54,7 @@ class TestMyModule(unittest.TestCase):
 
 if __name__ == "__main__":
     # Esta es una imagen de prueba que sirve para probar el test, no tiene nada que ver con la realidad
+
     frame = cv2.imread('visión-artificial.jpg')
 
     unittest.main()

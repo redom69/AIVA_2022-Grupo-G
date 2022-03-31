@@ -1,12 +1,11 @@
-import detect_client_in_frame
+import src.detect_client_in_frame as detect_client_in_frame
 import torch
-import numpy as np
 import cv2
-from time import time
+
 
 class VideoDetection:
 
-    def __init__(self,video, out_file):
+    def __init__(self, video, out_file):
         """
         Initializes the class with youtube url and output file.
         :param url: Has to be as youtube URL,on which prediction is made.
@@ -16,6 +15,7 @@ class VideoDetection:
         self.model = self.load_model()
         self.out_file = out_file
         self.bounding_box = []
+        self.test_frame = []
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     def get_video(self):
@@ -25,7 +25,8 @@ class VideoDetection:
         """
         return cv2.VideoCapture(self._video)
 
-    def load_model(self):
+    @staticmethod
+    def load_model():
         """
         Loads Yolo5 model from pytorch hub.
         :return: Trained Pytorch model.
@@ -34,6 +35,12 @@ class VideoDetection:
 
         return model
 
+    def get_test_frame(self):
+        """
+        Function for unitary tests
+        :return:  Test frame for unitary test
+        """
+        return self.test_frame
 
     def __call__(self):
         """
@@ -48,17 +55,13 @@ class VideoDetection:
         four_cc = cv2.VideoWriter_fourcc(*"MJPG")
         out = cv2.VideoWriter(self.out_file, four_cc, 20, (x_shape, y_shape))
         while True:
-            start_time = time()
             ret, frame = player.read()
             if not ret:
                 break
-            fd = detect_client_in_frame.frameDetection(frame)
-            results = detect_client_in_frame.frameDetection.score_frame(fd,frame,self.model)
-            frame = detect_client_in_frame.frameDetection.plot_boxes(fd,results, frame)
-            end_time = time()
-            print(fd.bounding_box)
-            fps = 1 / np.round(end_time - start_time, 3)
-            print(f"Frames Per Second : {fps}")
+            fd = detect_client_in_frame.FrameDetection(frame)
+            results = detect_client_in_frame.score_frame(frame, self.model)
+            frame = fd.plot_boxes(results, frame)
+            if len(fd.bounding_box) == 3:
+                self.test_frame = frame
             out.write(frame)
-
-
+        print("End of video")

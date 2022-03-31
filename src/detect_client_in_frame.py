@@ -1,9 +1,21 @@
-import torch
-import numpy as np
 import cv2
-from time import time
 
-class frameDetection:
+
+def score_frame(frame, model):
+    """
+    Takes a single frame as input, and scores the frame using yolo5 model.
+    :param model: model transfer from yolov5s
+    :param frame: input frame in numpy/list/tuple format.
+    :return: Labels and Coordinates of objects detected by model in the frame.
+    """
+    frame = [frame]
+    results = model(frame)
+
+    labels, cord = results.xyxyn[0][:, -1], results.xyxyn[0][:, :-1]
+    return labels, cord
+
+
+class FrameDetection:
     """
     Class implements Yolo5 model to make inferences on a youtube video using OpenCV.
     """
@@ -16,19 +28,6 @@ class frameDetection:
         """
         self.frame = frame
         self.bounding_box = []
-
-
-    def score_frame(self, frame,model):
-        """
-        Takes a single frame as input, and scores the frame using yolo5 model.
-        :param frame: input frame in numpy/list/tuple format.
-        :return: Labels and Coordinates of objects detected by model in the frame.
-        """
-        frame = [frame]
-        results = model(frame)
-
-        labels, cord = results.xyxyn[0][:, -1], results.xyxyn[0][:, :-1]
-        return labels, cord
 
     def plot_boxes(self, results, frame):
         """
