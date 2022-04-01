@@ -14,9 +14,9 @@ class VideoDetection:
         self._video = video
         self.model = self.load_model()
         self.out_file = out_file
-        self.bounding_box = []
         self.test_frame = []
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.bounding_box_test = []
+        self.videoIsClosed = False
 
     def get_video(self):
         """
@@ -59,9 +59,12 @@ class VideoDetection:
             if not ret:
                 break
             fd = detect_client_in_frame.FrameDetection(frame)
-            results = detect_client_in_frame.score_frame(frame, self.model)
-            frame = fd.plot_boxes(results, frame)
+            results = fd.score_frame(frame, self.model)
+            frameout = fd.plot_boxes(results, frame)
             if len(fd.bounding_box) == 3:
                 self.test_frame = frame
-            out.write(frame)
+                bbx=fd.test_bounding_box(results, frame)
+            out.write(frameout)
+        self.bounding_box_test = bbx
+        self.videoIsClosed = True
         print("End of video")
