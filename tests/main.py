@@ -6,7 +6,7 @@ from src.read_video import VideoDetection
 class TestMyModule(unittest.TestCase):
     global client_detector
     client_detector = VideoDetection("../dataset/OneShopOneWait2front.mpg",
-                                                "../dataset/results/OneShopOneWait2front.avi")
+                                     "../dataset/results/OneShopOneWait2front.avi")
     client_detector()
 
     def test_read_video(self):
