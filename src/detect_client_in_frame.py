@@ -36,7 +36,6 @@ class FrameDetection:
         :param frame: Frame which has been scored.
         :return: Frame with bounding boxes and labels ploted on it.
         """
-        cont = 0
         self.bounding_box = []
         labels, cord = results
         n = len(labels)
@@ -69,7 +68,8 @@ class FrameDetection:
                 bounding_box.append([x1, x1, x2, y2])
         return bounding_box
 
-    def entran(self, lista_y2, lista_y2_ant):
+    @staticmethod
+    def entran(lista_y2, lista_y2_ant):
         """
         Count the number of people going into the shop.
         :param lista_y2: contains y coordinates of lower right corner from the bounding box (current frame)
@@ -84,7 +84,8 @@ class FrameDetection:
 
         return cont_ent
 
-    def pasan(self, lista_x2):
+    @staticmethod
+    def pasan(lista_x2):
         """
         Count the number of people walking past the shop window.
         :param lista_x2: contains x coordinates of lower right corner from the bounding box (current frame)
@@ -94,20 +95,20 @@ class FrameDetection:
         c1 = 0
         c2 = 0
         for elem in lista_x2:
-            if (99 <= elem <= 101):
+            if 99 <= elem <= 101:
                 c1 += 1
-            elif (324 <= elem <= 326):
+            elif 324 <= elem <= 326:
                 c2 += 1
 
         return c1, c2
 
-    def se_paran(self, pos_x, anteriores, posicion):
+    @staticmethod
+    def se_paran(pos_x, anteriores, posicion):
         """
-        Count the number of people stopping in front of the shop window.
-        :param pos_x: contains x coordinates of lower right corner from the bounding box (current frame)
-        :param anteriores: a list of lists of x coordinates of lower right corner from the bounding box (previous 10 frames)
-        :param posicion: x coordinate of lower right corner from the bounding box if counter is increased
-        :return: number of people stopping in a frame
+        Count the number of people stopping in front of the shop window. :param pos_x: contains x coordinates of
+        lower right corner from the bounding box (current frame) :param anteriores: a list of lists of x coordinates
+        of lower right corner from the bounding box (previous 10 frames) :param posicion: x coordinate of lower right
+        corner from the bounding box if counter is increased :return: number of people stopping in a frame
         """
 
         cont_par = 0

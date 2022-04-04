@@ -6,5 +6,5 @@ if __name__ == '__main__':
     client_detector()
 
     print("Entran ", client_detector.entran, " clientes")
-    print("Pasan de largo ", client_detector.salen, " clientes")
+    print("Pasan de largo ", client_detector.no_pasan, " clientes")
     print("Esperan ", client_detector.esperan, " clientes")

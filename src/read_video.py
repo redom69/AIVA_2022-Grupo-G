@@ -20,7 +20,7 @@ class VideoDetection:
         self.bounding_box_test = []
         self.videoIsClosed = False
         self.entran = 0
-        self.salen = 0
+        self.no_pasan = 0
         self.esperan = 0
 
     def get_video(self):
@@ -104,6 +104,6 @@ class VideoDetection:
             self.bounding_box_test = bbx
             self.videoIsClosed = True
             self.entran = sum(c_entran)
-            self.salen = min(sum(c_l1), sum(c_l2))
+            self.no_pasan = min(sum(c_l1), sum(c_l2))
             self.esperan = sum(c_paran)
             progress.update(1)
