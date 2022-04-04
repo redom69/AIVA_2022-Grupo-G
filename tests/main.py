@@ -19,7 +19,7 @@ class TestMyModule(unittest.TestCase):
 
     # Test para comprobar cuantos han entrado a la tienda
     def test_enterShopClient(self):
-        self.assertEqual(mymodule.enterShop(client_detector), 0)
+        self.assertEqual(mymodule.enterShop(client_detector), 1)
 
     # Test para comprobar cuando se han parado en el escaparate
     def test_stopShopClient(self):
