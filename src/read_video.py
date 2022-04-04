@@ -1,6 +1,9 @@
-import src.detect_client_in_frame as detect_client_in_frame
-import torch
 import cv2
+import torch
+from time import time
+import src.detect_client_in_frame as detect_client_in_frame
+import numpy as np
+from collections import deque
 
 
 class VideoDetection:
@@ -48,23 +51,44 @@ class VideoDetection:
         and write the output into a new file.
         :return: void
         """
+        global bbx
+        c_entran = []
+        c_l1 = []
+        c_l2 = []
+        c_paran = []
         player = self.get_video()
         assert player.isOpened()
         x_shape = int(player.get(cv2.CAP_PROP_FRAME_WIDTH))
         y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))
         four_cc = cv2.VideoWriter_fourcc(*"MJPG")
         out = cv2.VideoWriter(self.out_file, four_cc, 20, (x_shape, y_shape))
+        pos_y_ant = []
+        x_anteriores = deque([], maxlen=10)
+        pos = 0
         while True:
+            start_time = time()
             ret, frame = player.read()
             if not ret:
                 break
             fd = detect_client_in_frame.FrameDetection(frame)
             results = fd.score_frame(frame, self.model)
-            frameout = fd.plot_boxes(results, frame)
+            frameout, pos_y, pos_x = fd.plot_boxes(results, frame)
+            x_anteriores.appendleft(pos_x)
+            ent = fd.entran(pos_y, pos_y_ant)
+            l1, l2 = fd.pasan(pos_x)
+            sp, pos = fd.se_paran(pos_x, x_anteriores, pos)
+            pos_y_ant = pos_y
+            c_entran.append(ent)
+            c_l1.append(l1)
+            c_l2.append(l2)
+            c_paran.append(sp)
             if len(fd.bounding_box) == 3:
                 self.test_frame = frame
-                bbx=fd.test_bounding_box(results, frame)
+                bbx = fd.test_bounding_box(results, frame)
+            end_time = time()
             out.write(frameout)
+            fps = 1 / np.round(end_time - start_time, 3)
+            print(f"Frames Per Second : {fps}")
         self.bounding_box_test = bbx
         self.videoIsClosed = True
-        print("End of video")
+        print(sum(c_entran), min(sum(c_l1), sum(c_l2)), sum(c_paran))

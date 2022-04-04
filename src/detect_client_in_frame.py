@@ -36,10 +36,13 @@ class FrameDetection:
         :param frame: Frame which has been scored.
         :return: Frame with bounding boxes and labels ploted on it.
         """
+        cont = 0
         self.bounding_box = []
         labels, cord = results
         n = len(labels)
         x_shape, y_shape = frame.shape[1], frame.shape[0]
+        lista_y2 = []
+        lista_x2 = []
         for i in range(n):
             row = cord[i]
             if row[4] >= 0.2:
@@ -48,7 +51,9 @@ class FrameDetection:
                 bgr = (0, 255, 0)
                 cv2.rectangle(frame, (x1, y1), (x2, y2), bgr, 2)
                 self.bounding_box.append([x1, x1, x2, y2])
-        return frame
+                lista_y2.append(y2)
+                lista_x2.append(x2)
+        return frame, lista_y2, lista_x2
 
     @staticmethod
     def test_bounding_box(results, frame):
@@ -63,3 +68,57 @@ class FrameDetection:
                     row[3] * y_shape)
                 bounding_box.append([x1, x1, x2, y2])
         return bounding_box
+
+    def entran(self, lista_y2, lista_y2_ant):
+        """
+        Count the number of people going into the shop.
+        :param lista_y2: contains y coordinates of lower right corner from the bounding box (current frame)
+        :param lista_y2_ant: contains y coordinates of lower right corner from the bounding box (previous frame)
+        :return: number of people going into the shop in a frame
+        """
+
+        cont_ent = 0
+        for elem in lista_y2:
+            if (elem == 140) and (141 in lista_y2_ant):
+                cont_ent += 1
+
+        return cont_ent
+
+    def pasan(self, lista_x2):
+        """
+        Count the number of people walking past the shop window.
+        :param lista_x2: contains x coordinates of lower right corner from the bounding box (current frame)
+        :return: number of people going through line 1 (c1) and line 2 (c2) in a frame
+        """
+
+        c1 = 0
+        c2 = 0
+        for elem in lista_x2:
+            if (99 <= elem <= 101):
+                c1 += 1
+            elif (324 <= elem <= 326):
+                c2 += 1
+
+        return c1, c2
+
+    def se_paran(self, pos_x, anteriores, posicion):
+        """
+        Count the number of people stopping in front of the shop window.
+        :param pos_x: contains x coordinates of lower right corner from the bounding box (current frame)
+        :param anteriores: a list of lists of x coordinates of lower right corner from the bounding box (previous 10 frames)
+        :param posicion: x coordinate of lower right corner from the bounding box if counter is increased
+        :return: number of people stopping in a frame
+        """
+
+        cont_par = 0
+        cont = 0
+        for x in pos_x:
+            if (x != posicion) and (60 < x < 210):
+                for lista in list(anteriores):
+                    if x in lista:  # contains
+                        cont += 1
+                if cont == 10:
+                    cont_par += 1
+                    posicion = x
+
+        return cont_par, posicion
