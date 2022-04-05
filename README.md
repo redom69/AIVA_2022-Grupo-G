@@ -34,4 +34,8 @@ El proyecto consta, actualmente, de 3 directorios principales, el directorio *sr
 
 Para ejecutar el proyecto habrá que hacer una pequeña configuración inicial dependiendo si se quiere ejecutar solo un vídeo o el directorio completo, de momento hay que insertar la ruta de la que se quiere extraer el video manualmente. Una vez insertada esta ruta ya se podrá ejecutar el fichero main del proyecto.
 
+~~~
+Ejemplo de ruta : "../dataset/OneLeaveShopReenter1front.mpg"
+~~~ 
+
 Para ejeutar los test es igual que para la ejecución del programa principal, primero configuraremos el video que deseamos leer y posteriormente este nos proporcionará los resultados de los test unitarios.
