@@ -19,3 +19,17 @@ Este proyecto está siendo realizado por:
   - Daniel Hernández Puerto &#8594; d.hernandezp.2016@alumnos.urjc.es
   - Águeda Sierra Carreto &#8594; a.sierra.2017@alumnos.urjc.es
 
+
+## Ejecución del proyecto
+
+Este proyecto ha sido desarrollado en dos entornos de programacion, en Google Colab y en Pycharm, pero el proyecto entero ha sido montado en Pycharm. La explicación que vendrá a continuación servirá para ejecutar el proyecto en Pycharm. Primero descargaremos o clonaremos el proyecto y lo sincronizaremos con el IDE. Una vez listo y montado el proyecto ejecutaremos el comando *pip install -r requirements.txt*. Una vez relizados estos pasos ya se podra ejecutar el proyecto. **Importante** comprobar que la version de Python que se esta utilizando es la *3.9.0*
+
+ ~~~
+    git clone https://github.com/redom69/AIVA_2022-Grupo-G.git
+~~~ 
+
+El proyecto consta, actualmente, de 3 directorios principales, el directorio *src* donde encontraremos todo el código referente a la ejecucción del algoritmo. El directorio *test* que servirá para ejecutar los test unitarios del proyecto y la carpeta de *docs* que contendrá todo lo referido a la documentación del proyecto.
+
+Para ejecutar el proyecto habrá que hacer una pequeña configuración inicial dependiendo si se quiere ejecutar solo un vídeo o el directorio completo, de momento hay que insertar la ruta de la que se quiere extraer el video manualmente. Una vez insertada esta ruta ya se podrá ejecutar el fichero main del proyecto.
+
+Para ejeutar los test es igual que para la ejecución del programa principal, primero configuraremos el video que deseamos leer y posteriormente este nos proporcionará los resultados de los test unitarios.
