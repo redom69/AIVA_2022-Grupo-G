@@ -22,9 +22,10 @@ Este proyecto está siendo realizado por:
 
 ## Ejecución del proyecto
 
-Este proyecto ha sido desarrollado en dos entornos de programacion, en Google Colab y en Pycharm, pero el proyecto entero ha sido montado en Pycharm. La explicación que vendrá a continuación servirá para ejecutar el proyecto en Pycharm. Primero descargaremos o clonaremos el proyecto y lo sincronizaremos con el IDE. Una vez listo y montado el proyecto ejecutaremos el comando *pip install -r requirements.txt*. Una vez relizados estos pasos ya se podra ejecutar el proyecto. **Importante** comprobar que la version de Python que se esta utilizando es la *3.9.0*
+Este proyecto ha sido desarrollado en dos entornos de programacion, en Google Colab y en Pycharm, pero el proyecto entero ha sido montado en Pycharm. La explicación que vendrá a continuación servirá para ejecutar el proyecto en Pycharm. Primero descargaremos o clonaremos el proyecto y lo sincronizaremos con el IDE. Una vez listo y montado el proyecto ejecutaremos el comando ***pip install -r requirements.txt**. Una vez relizados estos pasos ya se podra ejecutar el proyecto. 
+**Importante** comprobar que la version de Python que se esta utilizando es la *3.9.0*
 
- ~~~
+~~~
     git clone https://github.com/redom69/AIVA_2022-Grupo-G.git
 ~~~ 
 
