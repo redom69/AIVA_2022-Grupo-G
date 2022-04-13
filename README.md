@@ -50,13 +50,13 @@ Pasos a seguir para el despliegue:
 - Descargarse la imagen docker redom69/aiva-2022-grupo-g que se encuentra alojada en DockerHub. Para ello ejecutar:
 
 ~~~
-  docker pull redom69/aiva-2022-grupo-g
+  docker pull redom69/aiva-2022-grupo-g:aiva-grupog
 ~~~ 
 
 - Lanzar un contenedor con la imagen docker:
 
 ~~~
-  docker run --name ComVision redom69/aiva-2022-grupo-g   
+  docker run --name ComVision redom69/aiva-2022-grupo-g:aiva-grupog   
 ~~~ 
 
 - Puede visualizar que el contenedor está ejecutándose, utilizando el comando:
