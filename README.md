@@ -47,19 +47,19 @@ Se ha desarrollado una imagen Docker con el objeto de facilitar el despliegue de
 
 Pasos a seguir para el despliegue:
 
--Descargarse la imagen docker redom69/aiva-2022-grupo-g que se encuentra alojada en DockerHub. Para ello ejecutar:
+- Descargarse la imagen docker redom69/aiva-2022-grupo-g que se encuentra alojada en DockerHub. Para ello ejecutar:
 
 ~~~
   docker pull redom69/aiva-2022-grupo-g
 ~~~ 
 
--Lanzar un contenedor con la imagen docker:
+- Lanzar un contenedor con la imagen docker:
 
 ~~~
   docker run --name ComVision redom69/aiva-2022-grupo-g   
 ~~~ 
 
--Puede visualizar que el contenedor está ejecutándose, utilizando el comando:
+- Puede visualizar que el contenedor está ejecutándose, utilizando el comando:
 
 ~~~
   docker ps
