@@ -27,7 +27,7 @@ Este proyecto ha sido desarrollado en dos entornos de programacion, en Google Co
 **Importante** comprobar que la version de Python que se esta utilizando es la *3.9.0*
 
 ~~~
-    git clone https://github.com/redom69/AIVA_2022-Grupo-G.git
+  git clone https://github.com/redom69/AIVA_2022-Grupo-G.git
 ~~~ 
 
 El proyecto consta, actualmente, de 3 directorios principales, el directorio *src* donde encontraremos todo el código referente a la ejecucción del algoritmo. El directorio *test* que servirá para ejecutar los test unitarios del proyecto y la carpeta de *docs* que contendrá todo lo referido a la documentación del proyecto.
@@ -35,7 +35,32 @@ El proyecto consta, actualmente, de 3 directorios principales, el directorio *sr
 Para ejecutar el proyecto habrá que hacer una pequeña configuración inicial dependiendo si se quiere ejecutar solo un vídeo o el directorio completo, de momento hay que insertar la ruta de la que se quiere extraer el video manualmente. Una vez insertada esta ruta ya se podrá ejecutar el fichero main del proyecto.
 
 ~~~
-Ejemplo de ruta : "../dataset/OneLeaveShopReenter1front.mpg"
+  Ejemplo de ruta : "../dataset/OneLeaveShopReenter1front.mpg"
 ~~~ 
 
 Para ejeutar los test es igual que para la ejecución del programa principal, primero configuraremos el video que deseamos leer y posteriormente este nos proporcionará los resultados de los test unitarios.
+
+
+## Despliegue
+
+Se ha desarrollado una imagen Docker con el objeto de facilitar el despliegue de la aplicación. Es necesario tener instalado docker en la máquina donde se desea realizar el despliegue.
+
+Pasos a seguir para el despliegue:
+
+Descargarse la imagen docker redom69/aiva-2022-grupo-g que se encuentra alojada en DockerHub. Para ello ejecutar:
+
+~~~
+  docker pull redom69/aiva-2022-grupo-g
+~~~ 
+
+Lanzar un contenedor con la imagen docker:
+
+~~~
+  docker run --name ComVision redom69/aiva-2022-grupo-g   
+~~~ 
+
+Puede visualizar que el contenedor está ejecutándose, utilizando el comando:
+
+~~~
+  docker ps
+~~~ 
