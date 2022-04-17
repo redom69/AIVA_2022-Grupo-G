@@ -1,6 +1,6 @@
 import cv2
 import torch
-import detect_client_in_frame
+import src.detect_client_in_frame as detect_client_in_frame
 from collections import deque
 from tqdm import tqdm
 
