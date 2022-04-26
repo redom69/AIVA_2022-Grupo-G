@@ -1,4 +1,5 @@
 import cv2
+import pandas
 
 
 class FrameDetection:
@@ -15,7 +16,7 @@ class FrameDetection:
         self.bounding_box = []
 
     @staticmethod
-    def score_frame(frame, model):
+    def score_frame(frame, model, confiance, max):
         """
         Takes a single frame as input, and scores the frame using yolo5 model.
         :param model: model transfer from yolov5s
@@ -24,9 +25,16 @@ class FrameDetection:
         """
         frame = [frame]
         results = model(frame)
-
         labels, cord = results.xyxyn[0][:, -1], results.xyxyn[0][:, :-1]
-        return labels, cord
+        if len(results.pandas().xyxy[0]) > 0:
+            if len(confiance) > 0:
+                del confiance[0]
+            confiance.append(results.pandas().xyxy[0]['confidence'])
+            c = sum(results.pandas().xyxy[0]['confidence']) / len(results.pandas().xyxy[0]['confidence'])
+            if c > max:
+                return labels, cord, c
+
+        return labels, cord, max
 
     def plot_boxes(self, results, frame):
         """
@@ -37,7 +45,7 @@ class FrameDetection:
         """
         bounding_box = []
         self.bounding_box = []
-        labels, cord = results
+        labels, cord,_ = results
         n = len(labels)
         x_shape, y_shape = frame.shape[1], frame.shape[0]
         lista_y2 = []
